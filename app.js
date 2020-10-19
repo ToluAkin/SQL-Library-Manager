@@ -53,10 +53,11 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in developmen
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  // set locals, only providing error in development
+  err.status = 500;
+  // res.locals.error = err;
+  // res.status(500);
 
-  err.status(500);
   err.message = `Ooops! It looks like something went wrong on the server.`
   console.log(err.message);
   res.render('error', { err });
