@@ -4,8 +4,8 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const routes = require('./routes/index');
+const books = require('./routes/books');
 
 const app = express();
 
@@ -28,8 +28,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/', routes);
+app.use('/books', books);
 
 //test connection to the database and sync the model
 (async () => {
@@ -54,13 +54,19 @@ app.use(function(req, res, next) {
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
-  err.status = 500;
-  // res.locals.error = err;
-  // res.status(500);
+  res.locals.error = err;
+  res.status(err.status);
 
-  err.message = `Ooops! It looks like something went wrong on the server.`
-  console.log(err.message);
-  res.render('error', { err });
+  if (res.status(404)) {
+    err.status = 404;
+    err.message = `The page requested does not exist.`;
+    console.log(`${ err.status }: The page requested does not exist.`);
+    res.status(404).render('page-not-found', { err });
+  } else {
+    err.message = `Ooops! It looks like something went wrong on the server.`
+    console.log(err.message);
+    res.status(err.status || 500).render('error', { err });
+  }
 });
 
 module.exports = app;

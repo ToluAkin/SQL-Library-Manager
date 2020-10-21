@@ -1,18 +1,8 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, Sequelize) => {
-  class Book extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-    }
-  }
+const Sequelize = require('sequelize');
+
+module.exports = (sequelize) => {
+  class Book extends Sequelize.Model {}
   Book.init({
     title: {
       type: Sequelize.STRING,
@@ -42,7 +32,6 @@ module.exports = (sequelize, Sequelize) => {
     year: Sequelize.INTEGER
   }, {
     sequelize,
-    modelName: 'Book',
   });
   return Book;
 };
