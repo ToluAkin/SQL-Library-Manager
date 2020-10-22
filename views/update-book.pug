@@ -2,7 +2,7 @@ extends layout
 
 block content
     h1 Update Book
-    form(action="/books" method="post")
+    form(action=`/books/${book.id}` method="post" onsubmit="return confirm(Do you really want to update the book?)")
         p
             label(for="title") Title
                 input(type="text" name="title" id="title")
@@ -16,9 +16,9 @@ block content
             label(for="year") Year
                 input(type="text" name="year" id="year")
         p
-            input(type='submit') Update Book
-    form(action="/books/:id/delete" method="post")
+            input(type='submit' value="Update Book")
+    form(action=`/books/${book.id}/delete` method="post" onsubmit="return('Do you really want to delete this book')")
         p
             a.button(href='/books') Cancel
         p
-            input(type='submit') Delete Book
+            input(type='submit' value="Delete Book")
