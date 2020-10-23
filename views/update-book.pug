@@ -2,6 +2,9 @@ extends layout
 
 block content
     h1 Update Book
+
+    include errors
+        
     form(action=`/books/${book.id}/update` method="post" onsubmit="return confirm('Do you really want to update the book?')")
         p
             label(for="title") Title

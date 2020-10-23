@@ -38,7 +38,7 @@ app.use(function(err, req, res, next) {
   } else {
     err.message = `Ooops! It looks like something went wrong on the server.`
     console.log(err.message);
-    res.status(err.status || 500).render('error', { err });
+    res.status(err.status || 500).render('server-error', { err });
   }
 });
 
