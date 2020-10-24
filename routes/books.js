@@ -17,7 +17,6 @@ function asyncHandler(cb){
 /* Show the full list of books */
 router.get('/', asyncHandler(async (req, res) => {
   const books = await Book.findAll();
-  console.log(books)
   res.render('index', {  books, title: 'SQL Library Manager' })
 }));
 
