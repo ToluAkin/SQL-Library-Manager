@@ -1,4 +1,4 @@
-# Treehouse-FSJS-8
+# SQL-Library-Manager
 SQL Library Manager using JavaScript, Node.js, Express, Pug, SQLite and the SQL ORM Sequelize.<br>
 This is a web application that will include pages to list, add, update, and delete books. <br>
 
